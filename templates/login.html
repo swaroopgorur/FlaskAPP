@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action=""> <!-- action="" -> routes to the same route we are in when posted-->
+            {{ form.hidden_tag() }} <!-- Adding csrf token-->
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"><h3>Log In</h3></legend>
+
+                <div class="form-group">
+                    <h6>{{ form.email.label(class="form-control-label") }}</h6>
+                    <!-- Handling the errors -->
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {%else%}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                    
+                </div>
+                <div class="form-group">
+                    <h6>{{ form.password.label(class="form-control-label") }}</h6>
+                    <!-- Handling the errors -->
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                            <span> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {%else%}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <br/>
+                <div class="form-check">
+                    {{ form.remember.label(class="form-check-label")}}
+                    {{ form.remember(class="form-check-input")}}
+                </div>
+
+            </fieldset>
+            <div class="form-group">
+                <br/>
+                {{ form.submit(class="btn btn-primary")}}
+            </div>
+            <small class="text-muted ml-2">
+                <br/>
+                <a href="#">Forgot Password?</a>
+            </small>
+        </form>
+    </div>
+{% endblock content %}
