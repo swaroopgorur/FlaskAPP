@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Use the below command to install all the required packages:
 pip install -r requirements.txt
 
@@ -12,3 +13,4 @@ base.html:
 ------> Needs to be extended in all the html pages
 
 home.html:
+
