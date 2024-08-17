@@ -34,3 +34,15 @@ To initialize the database and
 ==>     user = User.query.filter_by(attr = 'param').first() ==> assigning query result to a variable
 ==>     user.email, user.password, user.username ==> fetch result using the variable
 ==>     db.drop_all() ==> delete all the table and their data
+
+#---------------------------------------------------------------------------------
+forms.py:
+==> Contains the code for the registeration form and login forms
+
+#---------------------------------------------------------------------------------
+base.html:
+------> Basic layut structure for all the html pages.
+------> Needs to be extended in all the html pages
+
+#---------------------------------------------------------------------------------
+home.html:

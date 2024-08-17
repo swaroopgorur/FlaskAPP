@@ -1,11 +1,9 @@
+Hey there !!
 
-#---------------------------------------------------------------------------------
-forms.py:
-==> Contains the code for the registeration form and login forms
+This web app is a WIP and it is used to create blog posts and read others blog posts.
 
-#---------------------------------------------------------------------------------
-base.html:
-------> Basic layut structure for all the html pages.
-------> Needs to be extended in all the html pages
+Happy reading and writing of blogs !!
 
-home.html:
+You can find what each modules in Steps.txt
+
+Enjoy!!
