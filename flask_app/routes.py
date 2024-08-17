@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect
 from flask_app.forms import RegisterationFormn, LoginFormn
 from flask_app.models import User, Post
-from flask_app import app
+from flask_app import app, db, bcrypt
 
 ############################### Global Variable Declaration ################################
 
@@ -15,7 +15,7 @@ posts = [
     {
         'author': 'Supriya.J',
         'title': 'Facts of Nirmala Sitharaman',
-        'content': 'A2A. It’s a difficult question for me at least. First of all, let’s understand who will decide whether Nirmala Sitharaman is a good finance minister or not. And what are the criteria to judge her performance? Ideally in the office, your Boss will do your appraisal or competency evaluation. He will decide whether you are good or not. So the onus and authority of judging Nirmala Sitharaman as the Finance Minister are with Modi Ji. Modi Ji must have been pleased with her performance as the Defense Minister in his first term, so he has given her the all-important Finance Ministry. During the Rafale deal controversy, Madam Sitharaman fought valiantly in Modi’s favor. Modi Ji must have been very highly impressed with her fighting spirit and loyalty. So it seems Madam Sitharaman has duly earned her position in the new cabinet. As such it’s Modi Ji and only Modi Ji going to evaluate her as the Finance Minister.',
+        'content': 'First of all, let’s understand who will decide whether Nirmala Sitharaman is a good finance minister or not. And what are the criteria to judge her performance? Ideally in the office, your Boss will do your appraisal or competency evaluation. He will decide whether you are good or not. So the onus and authority of judging Nirmala Sitharaman as the Finance Minister are with Modi Ji. Modi Ji must have been pleased with her performance as the Defense Minister in his first term, so he has given her the all-important Finance Ministry. During the Rafale deal controversy, Madam Sitharaman fought valiantly in Modi’s favor. Modi Ji must have been very highly impressed with her fighting spirit and loyalty. So it seems Madam Sitharaman has duly earned her position in the new cabinet. As such it’s Modi Ji and only Modi Ji going to evaluate her as the Finance Minister.',
         'date_posted': 'August 07, 2024'
     }
 ]
@@ -38,8 +38,12 @@ def about():
 def register(): 
     form = RegisterationFormn()
     if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username = form.username.data, email = form.email.data, password = hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Account has been created! Please procced to login!', 'success')
+        return redirect(url_for('login'))
     return render_template("register.html", title= "Register", form=form)
 
 ############################### Login page #################################################
@@ -48,7 +52,11 @@ def register():
 def login():
     form = LoginFormn()
     if form.validate_on_submit():
-        if form.email.data == 'swaroopgorur@gmail.com' and form.password.data == 'password123':
+        user = User.query.filter_by(email= form.email.data).first()
+        hashed_password = user.password
+        password = bcrypt.check_password_hash(hashed_password, form.password.data)
+        print(password)
+        if user and password:
             flash(f"Logged in to the Account for {form.email.data}", "success")
             return redirect(url_for('home'))
         else:

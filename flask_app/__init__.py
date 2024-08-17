@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 
 
 ############################### Flask App Creation #########################################
@@ -14,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 #-------------------------------------------------------------------------------------------
 
 db = SQLAlchemy(app) #SQLAlchemy db instance
-
+bcrypt = Bcrypt(app) 
 #-------------------------------------------------------------------------------------------
 from flask_app import routes
 
