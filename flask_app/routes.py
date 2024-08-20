@@ -1,7 +1,8 @@
-from flask import render_template, url_for, flash, redirect
-from flask_app.forms import RegisterationFormn, LoginFormn
+from flask import render_template, url_for, flash, redirect, request
+from flask_app.forms import RegisterationFormn, LoginForm
 from flask_app.models import User, Post
 from flask_app import app, db, bcrypt
+from flask_login import login_user, current_user, logout_user, login_required
 
 ############################### Global Variable Declaration ################################
 
@@ -35,7 +36,9 @@ def about():
 ############################### Registeration page #########################################
 
 @app.route("/register", methods= ['GET', 'POST'])
-def register(): 
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = RegisterationFormn()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -50,15 +53,34 @@ def register():
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
-    form = LoginFormn()
+    #if the current user is authenticated then we are redirecting it to the home page
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email= form.email.data).first()
-        hashed_password = user.password
-        password = bcrypt.check_password_hash(hashed_password, form.password.data)
-        print(password)
-        if user and password:
-            flash(f"Logged in to the Account for {form.email.data}", "success")
-            return redirect(url_for('home'))
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next') #args is a dictionary
+            #redirect to the next page if the next parameter is present else redirect to the home page.
+            return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
-            flash(f"Login unsuccessful. Please check username and password", "danger")
+            flash(f"Login unsuccessful. Please check email and password", "danger")
     return render_template("login.html", title= "Login", form=form)
+
+############################### Logout #####################################################
+
+@app.route("/logout")
+def logout():
+    logout_user() #using the function from the flask_login module to logout all the users and clears the remember cookies as well.
+    return redirect(url_for('home'))
+
+############################### Account #####################################################
+
+@app.route("/account")
+
+@login_required #this decorator is used to notify that for accounts route to be accessed we need to login first.
+#If you decorate a view with this, it will ensure that the current user is logged in and authenticated before calling the actual view. 
+# (If they are not, it calls the LoginManager.unauthorized callback.)
+def account():
+    return render_template("account.html", title= "Account")
