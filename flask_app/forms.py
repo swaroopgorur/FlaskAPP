@@ -34,7 +34,7 @@ class RegisterationFormn(FlaskForm):
 ################################# Login Form #########################################
 ######################################################################################
        
-class LoginFormn(FlaskForm):
+class LoginForm(FlaskForm):
     email =  StringField("Email",
                          validators=[DataRequired(), Email()])
     password = PasswordField("Password",
