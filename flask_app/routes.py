@@ -1,8 +1,12 @@
+############################### Import  ####################################################
+
 from flask import render_template, url_for, flash, redirect, request
-from flask_app.forms import RegisterationFormn, LoginForm
+from flask_app.forms import RegisterationFormn, LoginForm, UpdateAccountForm
 from flask_app.models import User, Post
 from flask_app import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
+import secrets, os
+from PIL import Image
 
 ############################### Global Variable Declaration ################################
 
@@ -39,6 +43,7 @@ def about():
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
+    
     form = RegisterationFormn()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -56,6 +61,7 @@ def login():
     #if the current user is authenticated then we are redirecting it to the home page
     if current_user.is_authenticated:
         return redirect(url_for('home'))
+    
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email= form.email.data).first()
@@ -68,19 +74,54 @@ def login():
             flash(f"Login unsuccessful. Please check email and password", "danger")
     return render_template("login.html", title= "Login", form=form)
 
-############################### Logout #####################################################
+############################### Logout Button ###############################################
 
 @app.route("/logout")
 def logout():
     logout_user() #using the function from the flask_login module to logout all the users and clears the remember cookies as well.
     return redirect(url_for('home'))
 
-############################### Account #####################################################
+############################### Account Details #############################################
 
-@app.route("/account")
+#################### Saving the picture by renaming the fn #######################
 
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, extension = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + extension
+    picture_path = os.path.join(app.root_path, "static/profile_pics", picture_fn)
+
+    ############## Resizing the Image using Pillow ###############
+    output_size = (125,125)
+    image = Image.open(form_picture)
+    image.thumbnail(output_size)
+    image.save(picture_path)
+    ############## Resizing the Image using Pillow ###############
+
+    return picture_fn
+
+#################### Routes for Account info ######################################
+
+@app.route("/account", methods = ['GET', 'POST'])
 @login_required #this decorator is used to notify that for accounts route to be accessed we need to login first.
 #If you decorate a view with this, it will ensure that the current user is logged in and authenticated before calling the actual view. 
 # (If they are not, it calls the LoginManager.unauthorized callback.)
 def account():
-    return render_template("account.html", title= "Account")
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            #use save_picture function to get the picture name and save the resized image in the picture path.
+            picture_name = save_picture(form.picture.data)
+            current_user.image_file = picture_name
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash("Account details have been updated successfully", "success")
+        return redirect(url_for('account'))
+    elif request.method == 'GET': #this by defalt populates the current user details in the form.
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    return render_template("account.html", title= "Account", image_file= image_file, form= form)
+
+############################### Account Details #############################################
