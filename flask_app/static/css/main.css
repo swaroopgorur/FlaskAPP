@@ -34,8 +34,16 @@ body {
   
   .article-title {
     color: #444444;
+    text-decoration: none; 
+    border: #697c57;
+    margin: auto;
   }
-  
+
+  a{
+    color: #428bca;
+    text-decoration: none;
+  }
+
   a.article-title:hover {
     color: #428bca;
     text-decoration: none;
@@ -77,4 +85,9 @@ body {
   
   .account-heading {
     font-size: 2.5rem;
+  }
+
+  h2.account-heading:hover{
+    color: #428bca;
+    text-decoration:solid;
   }
