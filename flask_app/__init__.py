@@ -38,6 +38,7 @@ def create_app(config_class = Config):
     # This must be called before accessing the database engine or session with the app.
     db.init_app(app=app)
     bcrypt.init_app(app=app)
+    login_manager.init_app(app=app)
     mail.init_app(app=app)
 
     ####### Importing Blueprint instances from Routes and Registering Blueprint ########
