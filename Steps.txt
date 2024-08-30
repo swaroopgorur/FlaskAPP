@@ -35,6 +35,18 @@ To initialize the database and
 ==>     user.email, user.password, user.username ==> fetch result using the variable
 ==>     db.drop_all() ==> delete all the table and their data
 
+#--------------------------------------------------------------------------------
+
+from flaskblog import create_app, db
+app = create_app()
+# context to run outside the application (no need to launch the server)
+ctx = app.app_context()
+ctx.push()  # start working on database after that command
+# Database manipulations here
+# ...
+ctx.pop()  # exit from the app
+exit()
+
 #---------------------------------------------------------------------------------
 forms.py:
 ==> Contains the code for the registeration form and login forms

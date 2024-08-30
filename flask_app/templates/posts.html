@@ -7,18 +7,18 @@
   <div class="media-body d-flex flex-column">
     <!------------------------------------------------- Username and Date div -------------------------------------->
     <div class="d-flex justify-content-between align-items-center">
-      <a class="mr-2" href="{{ url_for('user_post', username= post.author.username) }}" style="margin-bottom: 2px; border-bottom: 1px solid #8d8b8b;">{{ post.author.username }}</a>
+      <a class="mr-2" href="{{ url_for('users.user_post', username= post.author.username) }}" style="margin-bottom: 2px; border-bottom: 1px solid #8d8b8b;">{{ post.author.username }}</a>
       <small class="text-muted" style="margin-bottom: 2px; ">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
     </div><br/>
     <!------------------------------------------------- Post title and buttons -------------------------------------->
     <div class="d-flex justify-content-between align-items-center">
       <h2 class="mb-0">
-          <a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
+          <a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a>
       </h2>
       {% if post.author == current_user %}
         <div class="row">
           <div class="col">
-            <a class="btn btn-secondary btn-sm mt-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+            <a class="btn btn-secondary btn-sm mt-1" href="{{ url_for('posts.update_post', post_id=post.id) }}">Update</a>
           </div>
           <div class="col">
             <button class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
@@ -43,7 +43,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <form method="POST" action="{{ url_for('delete_post', post_id= post.id) }}">
+        <form method="POST" action="{{ url_for('posts.delete_post', post_id= post.id) }}">
           <input type="submit" class="btn btn-danger m-1" value="Delete">
         </form>
       </div>
