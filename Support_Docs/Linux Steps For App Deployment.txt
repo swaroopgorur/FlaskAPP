@@ -1,0 +1,45 @@
+Type the below commands after you have the linux bash setup done:
+
+###################################################################################################################
+############################################# Setup Linux Server ##################################################
+###################################################################################################################
+
+#--------------------------------------------------------------------------------
+
+Below commands run as the root user with all the permissions:
+
+apt update && apt upgrade
+hostnamectl set-hostname name_chosen
+nano /etc/hosts                                  -> add the hostname and ip address
+adduser username
+adduser username sudo
+exit
+ssh username@ip_address
+
+#--------------------------------------------------------------------------------
+
+In Local machine run the below commands:
+    ssh-keygen -b 4096
+    scp local_path username@ip_address:~/.ssh/authorized.keys(filename)
+
+#--------------------------------------------------------------------------------
+
+Go back to linux server and type below commands:
+
+
+sudo chmod 700 ~/.ssh/                           -> owner permissions for the .ssh folder
+sudo chmod 600 ~/.ssh/*                          -> 6 means ->6 permissions for the owner and no for group and others
+sudo nano /etc/ssh/sshd_config                   -> Disable root user login and password authentication
+sudo systemctl restart sshd
+sudo apt install ufw                             -> undisputed firewall installation
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow 5000
+sudo ufw enable
+sudo ufw status
+
+#--------------------------------------------------------------------------------
+
+In Local machine run the below commands: (Run in virtual environment)
+
+pip freeze > requirements.txt 
