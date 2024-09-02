@@ -31,7 +31,7 @@ def create_app(config_class = Config):
 
     ############################### Flask App Creation #################################
     app = Flask(__name__) #__name__ holds the name of the module
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     ################### Intitializing Extension obj ####################################
     # init_app: Initialize a Flask application for use with this extension instance. 
@@ -45,9 +45,11 @@ def create_app(config_class = Config):
     from flask_app.users.routes import users
     from flask_app.posts.routes import posts
     from flask_app.main.routes import main
+    from flask_app.errors.handlers import errors
     
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
+    app.register_blueprint(errors)
 
     return app
