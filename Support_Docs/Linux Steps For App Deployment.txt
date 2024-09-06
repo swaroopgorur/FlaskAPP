@@ -20,7 +20,7 @@ ssh username@ip_address
 
 In Local machine run the below commands:
     ssh-keygen -b 4096
-    scp local_path username@ip_address:~/.ssh/authorized.keys(filename)
+    scp local_path username@ip_address:~/.ssh/authorized_keys(filename)
 
 #--------------------------------------------------------------------------------
 
@@ -33,13 +33,57 @@ sudo nano /etc/ssh/sshd_config                   -> Disable root user login and 
 sudo systemctl restart sshd
 sudo apt install ufw                             -> undisputed firewall installation
 sudo ufw default allow outgoing
+sudo ufw default deny incoming
 sudo ufw allow ssh
 sudo ufw allow 5000
 sudo ufw enable
 sudo ufw status
 
-#--------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------
+Commands to upgrade python version (if required):
+
+sudo apt update
+sudo apt install -y build-essential libssl-dev zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libsqlite3-dev libreadline-dev libffi-dev libbz2-dev
+
+cd /tmp
+wget https://www.python.org/ftp/python/3.12.2/Python-3.12.2.tgz
+tar -xzf Python-3.12.2.tgz
+cd Python-3.12.2
+
+./configure --enable-optimizations
+make -j $(num_of_processors)
+sudo make altinstall
+
+python3.12 --version
+
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+
+sudo apt install python3.12
+
+python3.12 --version
+
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.12 1
+python3.12 -m ensurepip --upgrade
+python3.12 -m pip install --upgrade pip
+
+python3.12 -m venv myenv
+source myenv/bin/activate
+
+
+cd /tmp
+rm -rf Python-3.12.2 Python-3.12.2.tgz
+
+
+#---------------------------------------------------------------------------------------------------------------------
 
 In Local machine run the below commands: (Run in virtual environment)
 
+#run below command inside proj_foder to create requirements.txt file if not created yet
 pip freeze > requirements.txt 
+
+git clone repository_link
+cd proj_folder
+pip3 install -r requirements.txt
+
+
