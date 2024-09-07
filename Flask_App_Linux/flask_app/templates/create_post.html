@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="" enctype="multipart/form-data"> <!-- action="" -> routes to the same route we are in when posted-->
+        {{ form.hidden_tag() }} <!-- Adding csrf token-->
+        <fieldset class="form-group">
+            <!-------------------  Adding heading  --------------------------->
+            <legend class="border-bottom mb-4"><h3>{{ legend }}</h3></legend>
+            <!-------------------Div for title ---------------------------->
+            <div class="form-group">
+                <h6>{{ form.title.label(class="form-control-label") }}</h6>
+                <!-- Handling the errors -->
+                {% if form.title.errors %}
+                    {{ form.title(class="form-control form-control-lg is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                        <span> {{ error }}</span>
+                        {% endfor %}
+                    </div>
+                <!-- Handling the errors -->
+                {%else%}
+                    {{ form.title(class="form-control form-control-lg") }}
+                {% endif %}
+            </div><br/>
+            <!-------------------Div for content ---------------------------->
+            <div class="form-group">
+                <h6>{{ form.content.label(class="form-control-label") }}</h6>
+                <!-- Handling the errors -->
+                {% if form.content.errors %}
+                    {{ form.content(class="form-control form-control-lg is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.content.errors %}
+                        <span> {{ error }}</span>
+                        {% endfor %}
+                    </div>
+                <!-- Handling the errors -->
+                {%else%}
+                    {{ form.content(class="form-control form-control-lg") }}
+                {% endif %}                  
+            </div><br/>
+        </fieldset>
+        <!------------------- Div for submit button -------------------------->
+        <div class="form-group">
+            <br/>
+            {{ form.submit(class="btn btn-primary")}}
+        </div>
+        <!-------------------Div for submit button --------------------------->
+    </form>
+</div>
+{% endblock content %}
