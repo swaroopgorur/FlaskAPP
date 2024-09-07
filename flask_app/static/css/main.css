@@ -1,14 +1,17 @@
+/* Base styles */
 body {
   background: #f8f9fa;
   color: #333333;
   margin-top: 5rem;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Nunito', 'Arial', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
+  font-family: 'Poppins', 'Arial', sans-serif;
 }
 
+/* Navigation styles */
 .bg-steel {
   background-color: #3c4e5c;
   box-shadow: 0 2px 4px rgba(0,0,0,.1);
@@ -36,6 +39,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.5rem;
 }
 
+/* Content section styles */
 .content-section {
   background: #ffffff;
   padding: 20px;
@@ -45,6 +49,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 2px 4px rgba(0,0,0,.05);
 }
 
+/* Article styles */
 .article-title {
   color: #444444;
   text-decoration: none;
@@ -53,22 +58,139 @@ h1, h2, h3, h4, h5, h6 {
 
 a.article-title:hover {
   color: #428bca;
-  text-decoration:solid;
-}
-
-a {
-  color: #3c4e5c;
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-}
-
-a:hover {
-  color: #1a2530;
-  text-decoration: none;
+  text-decoration: solid;
 }
 
 .article-content {
-  white-space: pre-line;
+  font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.article-content h1, .article-content h2, .article-content h3, 
+.article-content h4, .article-content h5, .article-content h6 {
+  font-family: 'Poppins', 'Arial', sans-serif;
+  color: #2c3e50;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.article-content h1 {
+  font-size: 2.5rem;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.3em;
+}
+
+.article-content h2 {
+  font-size: 2rem;
+  border-bottom: 1px solid #3498db;
+  padding-bottom: 0.2em;
+}
+
+.article-content p {
+  margin-bottom: 1.2em;
+}
+
+.article-content a {
+  color: #3498db;
+  text-decoration: none;
+  border-bottom: 1px dotted #3498db;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  background: linear-gradient(90deg, #3498db, #2980b9, #3498db);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -ms-background-clip: text;
+  -o-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  -ms-text-fill-color: transparent;
+  -o-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: link-wave 5s ease infinite;
+}
+
+.article-content a:hover {
+  color: #2980b9;
+  border-bottom: 1px solid #2980b9;
+  animation: none;
+  background-size: 100% 100%;
+}
+
+.article-content ul, .article-content ol {
+  margin-bottom: 1.2em;
+  padding-left: 2em;
+}
+
+.article-content li {
+  margin-bottom: 0.5em;
+}
+
+.article-content ul {
+  list-style-type: none;
+}
+
+.article-content ul li::before {
+  content: '🌟';
+  margin-right: 0.5em;
+}
+
+.article-content ol {
+  list-style-type: none;
+  counter-reset: item;
+}
+
+.article-content ol li::before {
+  content: counter(item) "✨";
+  counter-increment: item;
+  margin-right: 0.5em;
+  color: #3498db;
+  font-weight: bold;
+}
+
+.article-content blockquote {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  border-left: 4px solid #3498db;
+  padding-left: 1em;
+  margin-left: 0;
+  color: #34495e;
+}
+
+.article-content code {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  background-color: #f7f7f7;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.article-content pre {
+  background-color: #f7f7f7;
+  padding: 1em;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin: 1em 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-content img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .article-img {
@@ -95,6 +217,7 @@ a:hover {
   vertical-align: middle;
 }
 
+/* Account styles */
 .account-img {
   height: 125px;
   width: 125px;
@@ -107,6 +230,7 @@ a:hover {
   font-size: 2.5rem;
 }
 
+/* Button styles */
 .btn {
   transition: all 0.3s ease-in-out;
 }
@@ -116,20 +240,53 @@ a:hover {
   box-shadow: 0 2px 4px rgba(0,0,0,.1);
 }
 
+/* Link wave animation */
+@keyframes link-wave {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Media queries */
 @media (max-width: 768px) {
   body {
-      margin-top: 4rem;
+    margin-top: 4rem;
   }
 
   .navbar-nav {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .navbar-nav .nav-item {
-      margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .content-section {
-      margin-top: 1rem;
+    margin-top: 1rem;
+  }
+
+  .article-content {
+    font-size: 1rem;
+    padding: 1.5rem;
+  }
+
+  .article-content h1 {
+    font-size: 2rem;
+  }
+
+  .article-content h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* For browsers that don't support text-fill-color */
+@supports not ((-webkit-text-fill-color: transparent) or (text-fill-color: transparent)) {
+  .article-content a {
+    background: none;
+    color: #3498db;
+  }
+  
+  .article-content a:hover {
+    color: #2980b9;
   }
 }
