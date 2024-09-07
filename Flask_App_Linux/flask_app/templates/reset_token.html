@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="" enctype="multipart/form-data"> <!-- action="" -> routes to the same route we are in when posted-->
+            {{ form.hidden_tag() }} <!-- Adding csrf token-->
+            <fieldset class="form-group">
+                <!-------------------  Adding heading  --------------------------->
+                <legend class="border-bottom mb-4"><h3>Reset Password</h3></legend>
+                <!-------------------Div for password ---------------------------->
+                <div class="form-group">
+                    <h6>{{ form.password.label(class="form-control-label") }}</h6>
+                    <!-- Handling the errors -->
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                            <span> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    <!-- Handling the errors -->
+                    {%else%}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}                   
+                </div>
+
+                <!-------------------Div for confirm_password ---------------------------->
+                <div class="form-group">
+                    <h6>{{ form.confirm_password.label(class="form-control-label") }}</h6>
+                    <!-- Handling the errors -->
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                            <span> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    <!-- Handling the errors -->
+                    {%else%}
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}                   
+                </div>
+
+            </fieldset>
+            <!-------------------Div for submit ---------------------------->
+            <div class="form-group">
+                <br/>
+                {{ form.submit(class="btn btn-primary")}}
+            </div>
+        </form>
+    </div>
+{% endblock content %}
