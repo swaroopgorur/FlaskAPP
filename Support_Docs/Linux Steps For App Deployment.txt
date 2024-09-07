@@ -84,6 +84,65 @@ pip freeze > requirements.txt
 
 git clone repository_link
 cd proj_folder
+
+sudo apt install python3-pip
+sudo apt install python3-venv
+python3 -m venv name_chosen
+source name_chosen/bin/activate
 pip3 install -r requirements.txt
 
+sudo touch /etc/flask_blog_config.json
+sudo nano /etc/flask_blog_config.json                             -> Add the configuration details
+export FLASK_APP=run.py
+flask run --host=0.0.0.0
+sudo apt install nginx
+sudo rm /etc/nginx/sites-enabled/default
 
+sudo nano /etc/nginx/sites-enabled/flaskapp
+    Add the below contents and save the file:
+
+server {
+        listen 80;
+        server_name server_local_ip_address;
+
+        location /static {
+                alias path/to/static;
+        }
+
+        location / {
+                proxy_pass http://localhost:8000;
+                include /etc/nginx/proxy_params;
+                proxy_redirect off;
+        }
+}
+
+sudo ufw allow http/tcp
+sudo ufw delete allow 5000
+sudo ufw enable
+sudo systemctl restart nginx
+
+cd FLASK_APP
+gunicorn -w 9 run:app                             -> number of workers should always be -> 2 * number of cores + 1
+                                                  -> nproc --all : number of cores
+
+sudo apt install supervisor
+
+sudo nano /etc/supervisor/conf.d/flaskapp.conf
+    Add the below contents and save the file:
+
+[program:flask_app]
+directory=/home/user_name/project_folder
+command=/home/user_name/project_folder/venv/bin/gunicorn -w 9 run:app
+user=user_name
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+stderr_logfile=/var/log/flaskapp/flaskapp.err.log
+stdout_logfile=/var/log/flaskapp/flaskapp.out.log
+
+sudo mkdir -p /var/log/flaskapp
+sudo touch /var/log/flaskapp/flaskapp.err.log
+sudo touch /var/log/flaskapp/flaskapp.out.log
+
+sudo supervisorctl reload
