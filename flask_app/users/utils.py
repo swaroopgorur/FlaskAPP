@@ -2,7 +2,7 @@ import os, secrets
 from PIL import Image
 from flask_app import mail
 from flask import current_app
-from flask import url_for
+from flask import render_template
 from flask_mail import Message
 
 
@@ -32,9 +32,5 @@ def send_reset_email(user):
         sender='noreply@demo.com',  # Set the sender to a 'noreply' address
         recipients=[user.email]
     )
-    msg.body = f''' To reset your password, please click on the below link \n
-{url_for('users.reset_token', token= token, _external= True)} 
-
-If you didnot request for a password reset, you can simply ignore this email!!  
-'''
+    msg.html = render_template("reset_email.html", token= token, title= "Password Reset", user= user)
     mail.send(msg)

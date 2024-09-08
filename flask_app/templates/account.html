@@ -15,7 +15,14 @@
                 <legend class="border-bottom mb-4"><h3>Account Info</h3></legend>
                 <!-------------------Div for username ---------------------------->
                 <div class="form-group">
-                    <h6>{{ form.username.label(class="form-control-label") }}</h6>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        &ensp;<h5>{{ form.username.label(class="form-control-label") }}</h5>
+                    </div>
                     <!-- Handling the errors -->
                     {% if form.username.errors %}
                         {{ form.username(class="form-control form-control-lg is-invalid")}}
@@ -31,7 +38,14 @@
                 </div><br/>
                 <!-------------------Div for email ---------------------------->
                 <div class="form-group">
-                    <h6>{{ form.email.label(class="form-control-label") }}</h6>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                        &ensp;<h5>{{ form.email.label(class="form-control-label") }}</h5>
+                    </div>
                     <!-- Handling the errors -->
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg is-invalid")}}
@@ -47,7 +61,14 @@
                 </div><br/>
                 <!------------ Div for file field (profile picture) ------------->
                 <div class="form-group">
-                    <h6>{{ form.picture.label() }}</h6>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-camera"></i>
+                            </span>
+                        </div>
+                        &ensp;<h5>{{ form.picture.label() }}</h5>
+                    </div>
                     {{ form.picture(class="form-control-file") }}
                     <!-- Handling the errors -->
                     {% if form.picture.errors %}
