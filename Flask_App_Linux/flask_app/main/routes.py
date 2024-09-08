@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request
+import os
+from flask import Blueprint, render_template, request, current_app
 from flask_app.models import Post
 
 main = Blueprint("main", __name__)
@@ -8,6 +9,9 @@ main = Blueprint("main", __name__)
 ############################################################################################
 
 @main.route("/")
+def default_page():
+    return render_template('website_loader.html')
+
 @main.route("/home") #route is a decorator that is used to handle all the backend stuff and retun the o/p of the called function
 def home():
     page = request.args.get('page', 1, type=int)
@@ -22,4 +26,4 @@ def home():
 
 @main.route("/about") #route is a decorator that is used to handle all the backend stuff and retun the o/p of the called function
 def about():
-    return render_template('about.html', title='About') 
+    return render_template('about.html', title='About')
