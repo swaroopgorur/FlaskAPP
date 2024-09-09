@@ -146,3 +146,11 @@ sudo touch /var/log/flaskapp/flaskapp.err.log
 sudo touch /var/log/flaskapp/flaskapp.out.log
 
 sudo supervisorctl reload
+
+-------------------------------------------------------------------------------------
+
+Image Resizing:
+
+sudo apt update
+sudo apt install imagemagick
+convert image_path -resize 1200x new_image_path
