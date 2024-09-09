@@ -10,3 +10,4 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USER')
     MAIL_PASSWORD = os.environ.get('MAIL_PASS')
+    PERSPECTIVE_API_KEY = os.environ.get('PERSPECTIVE_API_KEY')

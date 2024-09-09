@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from flask_app import db
 from flask_app.models import Post
 from flask_app.posts.forms import PostForm
+from flask_app.posts.utils import analyze_content, is_content_appropriate
 
 
 posts = Blueprint("posts", __name__)
@@ -19,11 +20,21 @@ def new_post():
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
-        author = current_user
-        post = Post(title=title, content=content, author=author)
-        db.session.add(post)
-        db.session.commit()
-        flash("You post has been created successfully!", "success")
+        
+        print(f"Analyzing content: '{title} {content}'")
+        analysis_result = analyze_content(title + " " + content)
+        
+        if analysis_result is None:
+            flash("Unable to analyze post content. Please try again later.", "warning")
+        elif is_content_appropriate(analysis_result):
+            author = current_user
+            post = Post(title=title, content=content, author=author)
+            db.session.add(post)
+            db.session.commit()
+            flash("Your post has been created successfully!", "success")
+            return redirect(url_for('main.home'))
+        else:
+            flash("Your post contains inappropriate content and cannot be published.", "danger")
     return render_template("create_post.html", title="New Post", form=form, legend="New Post")
 
 
@@ -43,11 +54,15 @@ def update_post(post_id):
         abort(403)
     form = PostForm()
     if form.validate_on_submit():
-        post.title = form.title.data
-        post.content = form.content.data
-        db.session.commit()
-        flash("Your Post has been updated successfully!", "success")
-        return redirect(url_for('posts.post', post_id=post_id))
+        analysis_result = analyze_content(form.title.data + " " + form.content.data)
+        if is_content_appropriate(analysis_result):
+            post.title = form.title.data
+            post.content = form.content.data
+            db.session.commit()
+            flash("Your Post has been updated successfully!", "success")
+            return redirect(url_for('posts.post', post_id=post_id))
+        else:
+            flash("Your post contains inappropriate content and cannot be published.", "danger")
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content 

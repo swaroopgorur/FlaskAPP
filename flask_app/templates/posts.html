@@ -24,11 +24,13 @@
           <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
         </div>
         {% endif %}
-      </div>
-      
+      </div>     
       <!-- Post content -->
-      <p class="article-content">{{ post.content }}</p>
-    </div>
+      <div class="article-container">
+        <input type="checkbox" id="toggle-content">
+          <p class="article-content">{{ post.content }}</p>
+        <label for="toggle-content" class="read-more-label"></label>
+      </div>
   </div>
 </article>
 
