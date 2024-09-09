@@ -83,6 +83,26 @@
             background-color: #3c4e5c;
             box-shadow: 0 2px 4px rgba(0,0,0,.1);
         }
+        .footer {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            color: #3c4e5c;
+            font-size: 0.9rem;
+            font-family: 'Nunito', 'Arial', sans-serif;
+            text-align: left;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        .footer a {
+            color: #df6969;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+        .footer a:hover {
+            color: #b54b4b;
+        }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -127,5 +147,24 @@
             </div>
         </div>
     </main>
+    <footer class="footer">
+        <div class="container">
+            <p>Developed with <i class="fas fa-heart" style="color: red;"></i> by 
+                <a href="https://2wablv8f9lz.typeform.com/to/gqCLiwuZ" target="_blank">Swaroop GS</a>
+            </p>
+            <p>
+                <a href="https://wa.me/9481072265" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp" style="font-size: 24px; color: #25D366;"></i>
+                </a>
+                <a href="https://www.instagram.com/swaroop.gorur" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram" style="font-size: 24px; color: #C13584;"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/swaroop-gorur-977708a0" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin" style="font-size: 24px; color: #0077B5;"></i>
+                </a>
+            </p>
+        </div>
+    </footer>
+    
 </body>
 </html>
