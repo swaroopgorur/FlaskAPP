@@ -44,7 +44,7 @@
             display: inline-block;
         }
         #welcome-text {
-            animation: typing-welcome 4s steps(10, end) 0s, blink-caret-welcome 0.75s ;   
+            animation: typing-welcome 2.8s steps(10, end) 0s, blink-caret-welcome 0.75s ;   
         }
         #sitename-text {
             visibility: hidden;
@@ -109,11 +109,11 @@
         }
         @keyframes typing-welcome {
             from { width: 0; }
-            to { width: 10ch; }
+            to { width: 7ch; }
         }
         @keyframes typing-sitename {
             from { width: 0; }
-            to { width: 13ch; }
+            to { width: 10ch; }
         }
         @keyframes fade-in-sitename {
             to { opacity: 1; visibility: visible; }
@@ -141,8 +141,8 @@
     <main role="main">
         <div class="hero">
             <div>
-                <h1 id="welcome-text"><i>Welcome to</i></h1>
-                <h1 id="sitename-text"><i>Echoes n Insights</i></h1>
+                <h1 id="welcome-text"><i>Echoing</i></h1>
+                <h1 id="sitename-text"><i>Your Insights</i></h1>
                 <a href="{{url_for('main.home')}}" class="nav-button">Explore Blogs</a>
             </div>
         </div>
