@@ -1,8 +1,6 @@
 import os
 
 class Config:
-    #created using the secrets module
-    #secrets.token_hex(16) ---> 'b4b1b3011043cf50e962c2c2dab8ac2c'
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     MAIL_SERVER = 'smtp.googlemail.com'

@@ -12,7 +12,7 @@
             {{ form.hidden_tag() }} <!-- Adding csrf token-->
             <fieldset class="form-group">
                 <!-------------------  Adding heading  --------------------------->
-                <legend class="border-bottom mb-4"><h3>Account Info</h3></legend>
+                <legend class="styled-legend"><h3>Account Info</h3></legend><br><br>
                 <!-------------------Div for username ---------------------------->
                 <div class="form-group">
                     <div class="input-group mb-3">
@@ -81,7 +81,7 @@
             <!------------------- Div for submit button -------------------------->
             <div class="form-group">
                 <br/>
-                {{ form.submit(class="btn btn-primary")}}
+                {{ form.submit(class="btn btn-dark")}}
             </div>
             <!-------------------Div for submit button --------------------------->
         </form>

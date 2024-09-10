@@ -64,7 +64,8 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
   color: #444444;
-  text-decoration:wavy;
+  text-decoration:link-wave;
+  animation:  5s ease infinite;
   transition: color 0.3s ease-in-out;
 }
 
