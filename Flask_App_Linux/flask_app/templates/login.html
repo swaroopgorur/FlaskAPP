@@ -4,10 +4,10 @@
         <form method="POST" action="" enctype="multipart/form-data"> <!-- action="" -> routes to the same route we are in when posted-->
             {{ form.hidden_tag() }} <!-- Adding csrf token-->
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4"><h3>Log In</h3></legend>
+                <legend class="styled-legend"><h3>LOG IN</h3></legend><br><br>
 
                 <div class="form-group">
-                    <h6>{{ form.email.label(class="form-control-label") }}</h6>
+                    <h6> <i class="fas fa-envelope"></i>&ensp;{{ form.email.label(class="form-control-label") }}</h6>                    
                     <!-- Handling the errors -->
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg is-invalid")}}
@@ -20,9 +20,9 @@
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
                     
-                </div>
+                </div><br>
                 <div class="form-group">
-                    <h6>{{ form.password.label(class="form-control-label") }}</h6>
+                    <h6><i class="fas fa-key"></i>&ensp;{{ form.password.label(class="form-control-label") }}</h6>
                     <!-- Handling the errors -->
                     {% if form.password.errors %}
                         {{ form.password(class="form-control form-control-lg is-invalid")}}
@@ -37,24 +37,24 @@
                 </div>
                 <br/>
                 <div class="form-check">
-                    {{ form.remember.label(class="form-check-label")}}
+                    <strong>{{ form.remember.label(class="form-check-label")}}</strong>
                     {{ form.remember(class="form-check-input")}}
                 </div>
 
             </fieldset>
             <div class="form-group">
                 <br/>
-                {{ form.submit(class="btn btn-outline-info")}}
+                {{ form.submit(class="btn btn-dark")}}
                 <small class="text-muted ml-2">
-                    <a href="{{ url_for('users.reset_request') }}">Forgot Password?</a>
+                    <a href="{{ url_for('users.reset_request') }}" style="color: #2104a1; font-weight: bold">Forgot Password <i class="fa-solid fa-question"></i></a>
                 </small>
             </div>
 
         </form>
     </div>
     <div class="border-top pt-3">
-        <small class="text-muted ml-2">
-            Need An Account? <a href="{{ url_for('users.register') }}">Sign Up</a>
-        </small>
+        <p class="text-body-secondary ml-2">
+            <strong>Need An Account?</strong> <a href="{{ url_for('users.register') }}" style="color: #2104a1; font-weight: bold">Sign Up</a>
+        </p>
     </div>
 {% endblock content %}
