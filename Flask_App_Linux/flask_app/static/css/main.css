@@ -56,7 +56,16 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid #e3e3e3;
   border-radius: 5px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,.05);
+  box-shadow:-2px 2px 10px #918f8f,2px -2px 10px #ffffff;
+}
+
+.list-group .list-group-item {
+  background: #ffffff;
+  padding: 20px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow:-2px 2px 10px #918f8f,2px -2px 10px #ffffff;
 }
 
 /* Article styles */
