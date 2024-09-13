@@ -68,6 +68,15 @@
             right: 20px;
             bottom: 20px;
         }
+        .text-body-secondary{
+            padding: 15px 25px;
+            font-size: 1.5rem;
+            font-weight: bolder;
+            font-family: 'Fira Code', monospace;
+            position: fixed;
+            right: 60px;
+            bottom: 80px;
+        }
         .site-header {
             color: #ffffff;
             background-color: rgba(255,255,255,0.1);
@@ -143,6 +152,7 @@
             <div>
                 <h1 id="welcome-text"><i>Echoing</i></h1>
                 <h1 id="sitename-text"><i>Your Insights</i></h1>
+                <p class="text-body-secondary">Enter Echoing Space ▼</p>
                 <a href="{{url_for('main.home')}}" class="nav-button">Explore Blogs</a>
             </div>
         </div>
