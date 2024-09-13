@@ -5,10 +5,10 @@
             {{ form.hidden_tag() }} <!-- Adding csrf token-->
             <fieldset class="form-group">
                 <!-------------------  Adding heading  --------------------------->
-                <legend class="border-bottom mb-4"><h3>Reset Password</h3></legend>
+                <legend class="styled-legend"><h3>Reset Password</h3></legend><br/><br/>
                 <!-------------------Div for email ---------------------------->
                 <div class="form-group">
-                    <h6>{{ form.email.label(class="form-control-label") }}</h6>
+                    <h6><i class="fas fa-envelope"></i>&ensp;{{ form.email.label(class="form-control-label") }}</h6>
                     <!-- Handling the errors -->
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg is-invalid")}}
@@ -25,7 +25,7 @@
             </fieldset>
             <div class="form-group">
                 <br/>
-                {{ form.submit(class="btn btn-primary")}}
+                {{ form.submit(class="btn btn-dark")}}
             </div>
         </form>
     </div>
